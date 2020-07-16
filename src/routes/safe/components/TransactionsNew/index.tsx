@@ -3,20 +3,38 @@ import React, { useState } from 'react'
 import {
   //  ButtonLink,
   //Loader,
+  //Title,
+  Icon,
+  IconText,
   Text,
-  //Icon,
   FixedIcon,
   Table,
   TableRow,
   TableAlignment,
 } from '@gnosis.pm/safe-react-components'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 //import { useFetchNewTransactions } from '../../container/hooks/useFetchNewTransactions'
 //import { currentPageSelector, newTransactionsCurrentPageSelector } from '../../store/selectors/newTransactions'
 //import { setPreviousPage } from '../../store/actions/transactionsNew/setPreviousPage'
 //import { setNextPage } from '../../store/actions/transactionsNew/setNextPage'
 import styled from 'styled-components'
 
+const FlexWithSeparation = styled.div`
+  display: flex;
+  align-items: center;
+
+  span,
+  div {
+    margin-right: 5px;
+  }
+`
+
 const TxContainer = styled.div``
+
+const StyledText = styled(Text)`
+  margin: 20px 0 20px;
+`
 
 const Transactions = (): React.ReactElement => {
   const [selectedRowIds, setSelectedRowIds] = useState<Set<string>>(new Set())
@@ -52,14 +70,43 @@ const Transactions = (): React.ReactElement => {
     {
       id: '1',
       cells: [
-        { alignment: TableAlignment.left, content: '1' },
+        { alignment: TableAlignment.left, content: <Text size="sm">1</Text> },
         {
           alignment: TableAlignment.left,
           content: (
-            <div>
+            <FlexWithSeparation>
               <FixedIcon type="arrowSent" />
               <Text size="sm">Outgoing Transfer</Text>
-            </div>
+            </FlexWithSeparation>
+          ),
+        },
+        {
+          alignment: TableAlignment.right,
+          content: (
+            <Text size="sm" strong>
+              -100.23 ETH
+            </Text>
+          ),
+        },
+        {
+          alignment: TableAlignment.right,
+          content: (
+            <Text size="sm">
+              {formatDistanceToNow(new Date(2020, 5, 13), { addSuffix: true }).replace('about', '').trim()}
+            </Text>
+          ),
+        },
+        {
+          alignment: TableAlignment.right,
+          content: <IconText iconSize="sm" textSize="sm" color="primary" iconType="owners" text="2 out 2" />,
+        },
+        {
+          alignment: TableAlignment.right,
+          content: (
+            <FlexWithSeparation>
+              <Icon size="sm" type="rocket" color="primary" />
+              <Icon size="sm" type="circleCross" color="error" />
+            </FlexWithSeparation>
           ),
         },
       ],
@@ -69,22 +116,22 @@ const Transactions = (): React.ReactElement => {
 
   return (
     <TxContainer>
-      <Text size="md" strong>
+      <StyledText size="md" strong>
         NEXT TRANSACTION
-      </Text>
+      </StyledText>
       <Table isCollapsible rows={rows} selectedRowIds={selectedRowIds} onRowClick={onRowClick} />
 
-      <Text size="md" strong>
+      <StyledText size="md" strong>
         QUEUE
-      </Text>
+      </StyledText>
 
-      <Text size="md" strong>
+      <StyledText size="md" strong>
         JUNE 20, 2020
-      </Text>
+      </StyledText>
 
-      <Text size="md" strong>
+      <StyledText size="md" strong>
         JUNE 19, 2020
-      </Text>
+      </StyledText>
 
       {/* <>
         {transactions.map((tx, index) => {
