@@ -11,6 +11,7 @@ import {
   Table,
   TableRow,
   TableAlignment,
+  Loader,
 } from '@gnosis.pm/safe-react-components'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
@@ -106,6 +107,53 @@ const Transactions = (): React.ReactElement => {
             <FlexWithSeparation>
               <Icon size="sm" type="rocket" color="primary" />
               <Icon size="sm" type="circleCross" color="error" />
+            </FlexWithSeparation>
+          ),
+        },
+      ],
+      collapsibleContent: <div>some data</div>,
+    },
+    {
+      id: '2',
+      cells: [
+        { alignment: TableAlignment.left, content: <Text size="sm">2</Text> },
+        {
+          alignment: TableAlignment.left,
+          content: (
+            <FlexWithSeparation>
+              <FixedIcon type="arrowSent" />
+              <Text size="sm">Outgoing Transfer</Text>
+            </FlexWithSeparation>
+          ),
+        },
+        {
+          alignment: TableAlignment.right,
+          content: (
+            <Text size="sm" strong>
+              -100.23 ETH
+            </Text>
+          ),
+        },
+        {
+          alignment: TableAlignment.right,
+          content: (
+            <Text size="sm">
+              {formatDistanceToNow(new Date(2020, 5, 13), { addSuffix: true }).replace('about', '').trim()}
+            </Text>
+          ),
+        },
+        {
+          alignment: TableAlignment.right,
+          content: <IconText iconSize="sm" textSize="sm" color="primary" iconType="owners" text="2 out 2" />,
+        },
+        {
+          alignment: TableAlignment.right,
+          content: (
+            <FlexWithSeparation>
+              <Loader size="xs" color="rinkeby" />
+              <Text size="sm" color="rinkeby">
+                Pending
+              </Text>
             </FlexWithSeparation>
           ),
         },
