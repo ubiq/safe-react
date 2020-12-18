@@ -1,4 +1,4 @@
-type TransferDirection = 'INCOMING' | 'OUTGOING' | 'UNKNOWN'
+type TransferDirection = 'INCOMING' | 'OUTGOING'
 
 type Erc20Transfer = {
   type: 'ERC20'
@@ -30,7 +30,7 @@ export type Transfer = {
   type: 'Transfer'
   sender: string
   recipient: string
-  direction: TransferDirection
+  direction?: TransferDirection
   transferInfo: TransferInfo // Polymorphic: Erc20, Erc721, Ether
 }
 
@@ -188,7 +188,7 @@ type MultiSigExecutionDetails = {
 
 type DetailedExecutionInfo = ModuleExecutionDetails | MultiSigExecutionDetails | MultisigConfirmation
 
-export type ExpandedTxDetails = {
+type ExpandedTxDetails = {
   executedAt: number
   txStatus: TransactionStatus
   txInfo: TransactionInfo
@@ -197,6 +197,12 @@ export type ExpandedTxDetails = {
   txHash: string | null
 }
 
-export type Transaction = TransactionSummary & {
+type Transaction = TransactionSummary & {
   txDetails?: ExpandedTxDetails
+}
+
+type ClientGatewayResponse = {
+  next: string | null
+  previous: string | null
+  results: TransactionSummary[]
 }

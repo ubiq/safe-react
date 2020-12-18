@@ -1,24 +1,9 @@
 import axios, { AxiosResponse } from 'axios'
 import { List } from 'immutable'
 
-import { TransactionSummary } from 'src/logic/safe/store/models/types/gateway'
+import { ClientGatewayResponse, TransactionSummary } from 'src/logic/safe/store/models/types/gateway'
 import { buildIncomingTxServiceUrl } from 'src/logic/safe/transactions/incomingTxHistory'
 import { sameString } from 'src/utils/strings'
-
-export type IncomingTxServiceModel = {
-  blockNumber: number
-  transactionHash: string
-  to: string
-  value: number
-  tokenAddress: string
-  from: string
-}
-
-type ClientGatewayResponse = {
-  next: string | null
-  previous: string | null
-  results: TransactionSummary[]
-}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let next, previous
