@@ -10,7 +10,7 @@ import { store } from 'src/store'
 import fetchTransactions from 'src/logic/safe/store/actions/transactions/fetchTransactions/fetchTransactions'
 import { Transaction, TransactionTypes } from 'src/logic/safe/store/models/types/transaction'
 import { SafeRecord } from 'src/logic/safe/store/models/safe'
-import { DataDecoded } from 'src/logic/safe/store/models/types/transactions.d'
+import { DataDecoded } from 'src/logic/safe/store/models/types/gateway.d'
 
 export type ConfirmationServiceModel = {
   confirmationType: string

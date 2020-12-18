@@ -107,7 +107,7 @@ export const getModuleAmount = (tx: SafeModuleTransaction, formatted = true): st
 
     if (tx.dataDecoded) {
       // if `dataDecoded` is defined, then it's a token transfer
-      const [, amount] = tx.dataDecoded.parameters
+      const [, amount] = tx.dataDecoded.parameters as any
       value = amount.value
     } else {
       // if `dataDecoded` is not defined, then it's an ETH transfer

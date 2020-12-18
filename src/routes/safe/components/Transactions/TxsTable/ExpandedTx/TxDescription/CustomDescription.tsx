@@ -25,7 +25,7 @@ import Paragraph from 'src/components/layout/Paragraph'
 import LinkWithRef from 'src/components/layout/Link'
 import { shortVersionOf } from 'src/logic/wallets/ethAddresses'
 import { Transaction, SafeModuleTransaction } from 'src/logic/safe/store/models/types/transaction'
-import { DataDecoded } from 'src/logic/safe/store/models/types/transactions.d'
+import { DataDecoded, SingleTransactionMethodParameter } from 'src/logic/safe/store/models/types/gateway.d'
 import DividerLine from 'src/components/DividerLine'
 import { isArrayParameter } from 'src/routes/safe/components/Balances/SendModal/screens/ContractInteraction/utils'
 
@@ -71,7 +71,7 @@ const TxInfoDetails = ({ data }: { data: DataDecoded }): React.ReactElement => (
       {data.method}
     </TxDetailsMethodName>
 
-    {data.parameters.map((param, index) => (
+    {data.parameters?.map((param: SingleTransactionMethodParameter, index) => (
       <TxDetailsMethodParam key={`${data.method}_param-${index}`} isArrayParameter={isArrayParameter(param.type)}>
         <StyledMethodName size="lg" strong>
           {param.name}({param.type}):
@@ -97,7 +97,7 @@ interface NewSpendingLimitDetailsProps {
 
 const ModifySpendingLimitDetails = ({ data }: NewSpendingLimitDetailsProps): React.ReactElement => {
   const [beneficiary, tokenAddress, amount, resetTimeMin] = React.useMemo(
-    () => data.parameters.map(({ value }) => value),
+    () => data.parameters?.map(({ value }: SingleTransactionMethodParameter) => value) ?? [],
     [data.parameters],
   )
 
@@ -131,7 +131,10 @@ const ModifySpendingLimitDetails = ({ data }: NewSpendingLimitDetailsProps): Rea
 }
 
 const DeleteSpendingLimitDetails = ({ data }: NewSpendingLimitDetailsProps): React.ReactElement => {
-  const [beneficiary, tokenAddress] = React.useMemo(() => data.parameters.map(({ value }) => value), [data.parameters])
+  const [beneficiary, tokenAddress] = React.useMemo(
+    () => data.parameters?.map(({ value }: SingleTransactionMethodParameter) => value) ?? [],
+    [data.parameters],
+  )
   const tokenInfo = useTokenInfo(tokenAddress)
 
   return (

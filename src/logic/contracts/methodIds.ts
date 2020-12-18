@@ -1,5 +1,5 @@
+import { DataDecoded, Parameter } from 'src/logic/safe/store/models/types/gateway.d'
 import {
-  DataDecoded,
   SAFE_METHOD_ID_TO_NAME,
   SAFE_METHODS_NAMES,
   SPENDING_LIMIT_METHOD_ID_TO_NAME,
@@ -15,7 +15,7 @@ type DecodeInfoProps = {
   params: Record<string, string>
 }
 
-const decodeInfo = ({ paramsHash, params }: DecodeInfoProps): DataDecoded['parameters'] => {
+const decodeInfo = ({ paramsHash, params }: DecodeInfoProps): Parameter[] => {
   const decodedParameters = web3.eth.abi.decodeParameters(Object.values(params), paramsHash)
 
   return Object.keys(params).map((name, index) => ({

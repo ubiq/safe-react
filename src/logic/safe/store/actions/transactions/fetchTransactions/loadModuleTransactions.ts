@@ -1,6 +1,6 @@
 import fetchTransactions from 'src/logic/safe/store/actions/transactions/fetchTransactions/fetchTransactions'
 import { TransactionTypes } from 'src/logic/safe/store/models/types/transaction'
-import { DataDecoded, Operation } from 'src/logic/safe/store/models/types/transactions.d'
+import { DataDecoded, Operation } from 'src/logic/safe/store/models/types/gateway.d'
 
 export type ModuleTxServiceModel = {
   created: string
