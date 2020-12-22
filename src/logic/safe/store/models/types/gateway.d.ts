@@ -47,19 +47,12 @@ type InternalTransaction = {
   dataDecoded: DataDecoded | null
 }
 
-type ValueDecodedType = InternalTransaction[]
-
-type SingleTransactionMethodParameter = {
+type Parameter = {
   name: string
   type: string
   value: string
+  valueDecoded: InternalTransaction[] | null
 }
-
-type MultiSendTransactionMethodParameter = {
-  valueDecoded: ValueDecodedType
-}
-
-type Parameter = SingleTransactionMethodParameter | MultiSendTransactionMethodParameter
 
 type DataDecoded = {
   method: string
@@ -176,17 +169,34 @@ type MultiSigConfirmations = {
   signature: string | null
 }
 
+type TokenType = 'ERC721' | 'ERC20' | 'ETHER'
+
+type TokenInfo = {
+  tokenType: TokenType
+  address: string
+  decimals: number
+  symbol: string
+  name: string
+  logoUri: string | null
+}
+
 type MultiSigExecutionDetails = {
   submittedAt: number
   nonce: number
+  safeTxGas: number
+  baseGas: number
+  gasPrice: string
+  gasToken: string
+  refundReceiver: string
   safeTxHash: string
   executor: string | null
   signers: string[]
   confirmationsRequired: number
   confirmations: MultiSigConfirmations[]
+  gasTokenInfo: TokenInfo | null
 }
 
-type DetailedExecutionInfo = ModuleExecutionDetails | MultiSigExecutionDetails | MultisigConfirmation
+type DetailedExecutionInfo = ModuleExecutionDetails | MultiSigExecutionDetails
 
 type ExpandedTxDetails = {
   executedAt: number
@@ -199,6 +209,21 @@ type ExpandedTxDetails = {
 
 type Transaction = TransactionSummary & {
   txDetails?: ExpandedTxDetails
+}
+
+type UnifiedTransaction = {
+  // key can be `nonce` (queued) or `timestamp` (history)
+  [key: number]: Transaction[]
+}
+
+type StoreStructure = {
+  transactions: {
+    queued: {
+      next: UnifiedTransaction // 1 Transaction element
+      queue: UnifiedTransaction // n Transaction elements
+    }
+    history: UnifiedTransaction // n Transaction elements
+  }
 }
 
 type ClientGatewayResponse = {
