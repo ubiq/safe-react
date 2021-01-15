@@ -41,6 +41,7 @@ export enum ETHEREUM_NETWORK {
   ROPSTEN = 3,
   RINKEBY = 4,
   GOERLI = 5,
+  UBIQ = 88,
   KOVAN = 42,
   XDAI = 100,
   ENERGY_WEB_CHAIN = 246,
