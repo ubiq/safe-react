@@ -20958,7 +20958,6 @@ workbox-build@^5.1.4:
     workbox-cacheable-response "^5.1.4"
     workbox-core "^5.1.4"
     workbox-expiration "^5.1.4"
-    workbox-google-analytics "^5.1.4"
     workbox-navigation-preload "^5.1.4"
     workbox-precaching "^5.1.4"
     workbox-range-requests "^5.1.4"
@@ -20986,16 +20985,6 @@ workbox-expiration@^5.1.4:
   integrity sha512-oDO/5iC65h2Eq7jctAv858W2+CeRW5e0jZBMNRXpzp0ZPvuT6GblUiHnAsC5W5lANs1QS9atVOm4ifrBiYY7AQ==
   dependencies:
     workbox-core "^5.1.4"
-
-workbox-google-analytics@^5.1.4:
-  version "5.1.4"
-  resolved "https://registry.yarnpkg.com/workbox-google-analytics/-/workbox-google-analytics-5.1.4.tgz#b3376806b1ac7d7df8418304d379707195fa8517"
-  integrity sha512-0IFhKoEVrreHpKgcOoddV+oIaVXBFKXUzJVBI+nb0bxmcwYuZMdteBTp8AEDJacENtc9xbR0wa9RDCnYsCDLjA==
-  dependencies:
-    workbox-background-sync "^5.1.4"
-    workbox-core "^5.1.4"
-    workbox-routing "^5.1.4"
-    workbox-strategies "^5.1.4"
 
 workbox-navigation-preload@^5.1.4:
   version "5.1.4"

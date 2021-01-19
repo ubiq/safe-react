@@ -25,7 +25,6 @@ import { grantedSelector } from 'src/routes/safe/container/selector'
 import { getNetworkName, getTxServiceUrl } from 'src/config'
 import { SAFELIST_ADDRESS } from 'src/routes/routes'
 import { isSameURL } from 'src/utils/url'
-import { useAnalytics, SAFE_NAVIGATION_EVENT } from 'src/utils/googleAnalytics'
 import { loadFromStorage, saveToStorage } from 'src/utils/storage'
 import { staticAppsList } from 'src/routes/safe/components/Apps/utils'
 import { LoadingContainer } from 'src/components/LoaderContainer/index'
@@ -98,7 +97,6 @@ const AppFrame = ({ appUrl }: Props): React.ReactElement => {
   const safeAddress = useSelector(safeParamAddressFromStateSelector)
   const ethBalance = useSelector(safeEthBalanceSelector)
   const safeName = useSelector(safeNameSelector)
-  const { trackEvent } = useAnalytics()
   const history = useHistory()
   const { consentReceived, onConsentReceipt } = useLegalConsent()
 
@@ -268,13 +266,6 @@ const AppFrame = ({ appUrl }: Props): React.ReactElement => {
 
     loadApp()
   }, [appUrl])
-
-  //track GA
-  useEffect(() => {
-    if (safeApp) {
-      trackEvent({ category: SAFE_NAVIGATION_EVENT, action: 'Apps', label: safeApp.name })
-    }
-  }, [safeApp, trackEvent])
 
   if (!appUrl) {
     throw Error('App url No provided or it is invalid.')

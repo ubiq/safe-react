@@ -10,7 +10,7 @@ import {
   SafeFeatures,
   Wallets,
 } from 'src/config/networks/network.d'
-import { APP_ENV, ETHERSCAN_API_KEY, GOOGLE_ANALYTICS_ID, INFURA_TOKEN, NETWORK, NODE_ENV } from 'src/utils/constants'
+import { APP_ENV, ETHERSCAN_API_KEY, INFURA_TOKEN, NETWORK, NODE_ENV } from 'src/utils/constants'
 import { ensureOnce } from 'src/utils/singleton'
 
 export const getNetworkId = (): ETHEREUM_NETWORK => ETHEREUM_NETWORK[NETWORK]
@@ -111,8 +111,6 @@ export const isFeatureEnabled = memoize((feature: FEATURES): boolean => {
 export const getNetworkConfigDisabledWallets = (): Wallets => getConfig()?.disabledWallets || []
 
 export const getNetworkInfo = (): NetworkSettings => getConfig().network
-
-export const getGoogleAnalyticsTrackingID = (): string => GOOGLE_ANALYTICS_ID
 
 const fetchContractABI = memoize(
   async (url: string, contractAddress: string, apiKey?: string) => {
